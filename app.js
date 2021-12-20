@@ -40,14 +40,18 @@ bookForm.addEventListener('submit', function(event){
     const author = document.querySelector("#author").value;
     const pages = document.querySelector("#pages").value;
     const read = document.querySelector("#read").value;
-    
-    //Add book
+        
     const book = new Book(title, author, pages, read);
-    addBookToPage(book);
-
-    //Add book to local storage
-    myLibrary.push(book);
     
+    //Check for duplicates
+    if (myLibrary.some(book => book.title === title)) {
+        alert("Book already in library!")
+    } else {
+        addBookToPage(book);
+        //Add book to local storage
+        myLibrary.push(book);
+    }
+
     //Clear form
     bookForm.reset();
 });
