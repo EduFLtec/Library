@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="main.css" rel="stylesheet">
+    <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+    <title>My Library</title>
+  </head>
+  <body>
+    <div class="mui-container">
+        <h1 class="mui--text-center">My Library</h1>
+        <h2>Add Book</h2>
+        <form id="book-form">
+            <div class="mui-textfield">
+                <input type="text" id="title" placeholder="Title" required>
+            </div>
+            <div class="mui-textfield">
+                <input type="text" id="author" placeholder="Author" required>
+            </div>
+            <div class="mui-textfield">
+                <input type="number" id="pages" placeholder="Pages" required>
+            </div>
+            <div class="mui-select">
+                <select id="read">
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+                <label>Read?</label>
+              </div>
+            <div>
+                <input type="submit" class="mui-btn mui-btn--large mui-btn--primary mui-btn--raised item-submit" value="Add New Book">
+            </div>
+        </form>
+        <table class="mui-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Pages</th>
+                    <th>Read</th>
+                    <th>Edit / Remove</th>
+                </tr>
+            </thead>
+            <tbody id="book-list"></tbody>
+        </table>
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
