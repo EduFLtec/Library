@@ -1,8 +1,9 @@
-//Array of Book objects for local storage
+//Book Storage
 let myLibrary = [];
 
 //Element variables 
 const bookForm = document.querySelector("#book-form");
+
 
 //Book object constructor
 function Book (title, author, pages, read) {
@@ -11,6 +12,15 @@ function Book (title, author, pages, read) {
         this.pages = pages;
         this.read = read;
     }
+
+//Toggle read status
+Book.prototype.toggleRead = function () {
+    if (this.read === "Yes") {
+        this.read === "No"
+    } else {
+        this.read === "Yes"
+    };
+}
 
 //Add books to page
 function addBookToPage(book) {
@@ -22,10 +32,10 @@ function addBookToPage(book) {
         <td class="book-data">${book.title}</td>
         <td class="book-data">${book.author}</td>
         <td class="book-data">${book.pages}</td>
-        <td class="book-data"><button class="mui-btn mui-btn--small mui-btn--primary read-button">${book.read}</button></td>
+        <td class="book-data"><button class="mui-btn mui-btn--small mui-btn--primary read-button-${book.read}">${book.read}</button></td>
         <td><button class="mui-btn mui-btn--small mui-btn--fab mui-btn--danger delete-button">X</button></td>
         `;
-
+        
         list.appendChild(row);
     }
 
@@ -56,14 +66,10 @@ bookForm.addEventListener('submit', function(event){
     bookForm.reset();
 });
 
-//Event listner to style read button based on status
-
-
 //Event listener to change read status
 
 
 //Event listener to delete a book
-
 
 
 //Starting Books 

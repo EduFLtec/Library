@@ -5,3 +5,11 @@
 .edit-data{
     border: solid #ff0000;
 }
+
+.read-button-Yes{
+    background-color: #0cd30c;
+}
+
+.read-button-No {
+    background-color: #ff1505;
+}
