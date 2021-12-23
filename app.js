@@ -18,9 +18,7 @@ Book.prototype.addBookToLibrary = function () {
     this.index = myLibrary.indexOf(this);
 }
 
-//Add books to page
 function addBookToPage(book) {
-        //Create tr element
         const row = document.createElement("tr");
         //Associate book tr element with library object index
         row.id = book.index;
@@ -61,29 +59,29 @@ bookForm.addEventListener('submit', function(event){
     bookForm.reset();
 });
 
-//Event listener to change read status
-bookList.onclick = function (event) {
-    //Use event delegation to catch dynamically generated elements
+//Use event delegation to catch dynamically generated elements
+bookList.onclick = function (event) {  
     let target = event.target;
+    //Event to change read status
     if (target.classList.contains("read-button-Yes")){
         console.log ("yes");
     }
     if (target.classList.contains("read-button-No")) {
         console.log ("no");
     }
+    //Event to delete book
+    if (target.classList.contains("delete-button")) {
+        let libraryIndex = target.parentNode.parentNode.id;
+        myLibrary.splice(libraryIndex, 1);
+        document.getElementById(libraryIndex).remove();
+    }
 }
-
-
-//Event listener to delete a book
-
 
 //Starting Books 
 const book1 = new Book("The Shining", "Steven King", 780, "Yes");
 const book2 = new Book("Farenheit 451", "Ray Bradbury", 300, "No");
-//Add starting books to local storage
 book1.addBookToLibrary();
 book2.addBookToLibrary();
-//Display starting books to page
 addBookToPage(book1);
 addBookToPage(book2);
 
