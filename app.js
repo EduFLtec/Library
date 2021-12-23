@@ -3,7 +3,7 @@ let myLibrary = [];
 
 //Element variables 
 const bookForm = document.querySelector("#book-form");
-
+const bookList = document.querySelector("#book-list");
 
 //Book object constructor
 function Book (title, author, pages, read) {
@@ -24,7 +24,6 @@ Book.prototype.toggleRead = function () {
 
 //Add books to page
 function addBookToPage(book) {
-    const list = document.querySelector("#book-list");
         //Create tr element
         const row = document.createElement("tr");
         //Insert columns
@@ -36,9 +35,8 @@ function addBookToPage(book) {
         <td><button class="mui-btn mui-btn--small mui-btn--fab mui-btn--danger delete-button">X</button></td>
         `;
         
-        list.appendChild(row);
+        bookList.appendChild(row);
     }
-
 
 //Event listener to add a book
 bookForm.addEventListener('submit', function(event){
@@ -67,6 +65,15 @@ bookForm.addEventListener('submit', function(event){
 });
 
 //Event listener to change read status
+bookList.onclick = function (event) {
+    let target = event.target;
+    if (target.classList.contains("read-button-Yes")){
+        console.log ("yes");
+    }
+    if (target.classList.contains("read-button-No")) {
+        console.log ("no");
+    }
+}
 
 
 //Event listener to delete a book
@@ -81,3 +88,4 @@ myLibrary.push(book2);
 //Display starting books to page
 addBookToPage(book1);
 addBookToPage(book2);
+
