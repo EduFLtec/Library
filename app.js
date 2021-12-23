@@ -1,4 +1,3 @@
-//Book Storage
 let myLibrary = [];
 
 //Element variables 
@@ -14,18 +13,17 @@ function Book (title, author, pages, read) {
     }
 
 //Toggle read status
-Book.prototype.toggleRead = function () {
-    if (this.read === "Yes") {
-        this.read === "No"
-    } else {
-        this.read === "Yes"
-    };
+Book.prototype.addBookToLibrary = function () {
+    myLibrary.push(this);
+    this.index = myLibrary.indexOf(this);
 }
 
 //Add books to page
 function addBookToPage(book) {
         //Create tr element
         const row = document.createElement("tr");
+        //Associate book tr element with library object index
+        row.id = book.index;
         //Insert columns
         row.innerHTML = `
         <td class="book-data">${book.title}</td>
@@ -55,9 +53,8 @@ bookForm.addEventListener('submit', function(event){
     if (myLibrary.some(book => book.title === title)) {
         alert("Book already in library!")
     } else {
+        book.addBookToLibrary();
         addBookToPage(book);
-        //Add book to local storage
-        myLibrary.push(book);
     }
 
     //Clear form
@@ -66,6 +63,7 @@ bookForm.addEventListener('submit', function(event){
 
 //Event listener to change read status
 bookList.onclick = function (event) {
+    //Use event delegation to catch dynamically generated elements
     let target = event.target;
     if (target.classList.contains("read-button-Yes")){
         console.log ("yes");
@@ -83,8 +81,8 @@ bookList.onclick = function (event) {
 const book1 = new Book("The Shining", "Steven King", 780, "Yes");
 const book2 = new Book("Farenheit 451", "Ray Bradbury", 300, "No");
 //Add starting books to local storage
-myLibrary.push(book1);
-myLibrary.push(book2);
+book1.addBookToLibrary();
+book2.addBookToLibrary();
 //Display starting books to page
 addBookToPage(book1);
 addBookToPage(book2);
