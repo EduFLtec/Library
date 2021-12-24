@@ -12,22 +12,15 @@ function Book (title, author, pages, read) {
         this.read = read;
     }
 
-//Toggle read status
-Book.prototype.addBookToLibrary = function () {
-    myLibrary.push(this);
-    this.index = myLibrary.indexOf(this);
-}
-
 function addBookToPage(book) {
         const row = document.createElement("tr");
-        //Associate book tr element with library object index
-        row.id = book.index;
+
         //Insert columns
         row.innerHTML = `
-        <td class="book-data">${book.title}</td>
-        <td class="book-data">${book.author}</td>
-        <td class="book-data">${book.pages}</td>
-        <td class="book-data"><button class="mui-btn mui-btn--small mui-btn--primary read-button-${book.read}">${book.read}</button></td>
+        <td class="book-data title">${book.title}</td>
+        <td class="book-data author">${book.author}</td>
+        <td class="book-data pages">${book.pages}</td>
+        <td class="book-data read"><button class="mui-btn mui-btn--small mui-btn--primary read-button-${book.read}">${book.read}</button></td>
         <td><button class="mui-btn mui-btn--small mui-btn--fab mui-btn--danger delete-button">X</button></td>
         `;
         
@@ -51,8 +44,8 @@ bookForm.addEventListener('submit', function(event){
     if (myLibrary.some(book => book.title === title)) {
         alert("Book already in library!")
     } else {
-        book.addBookToLibrary();
         addBookToPage(book);
+        myLibrary.push(book);
     }
 
     //Clear form
@@ -62,7 +55,7 @@ bookForm.addEventListener('submit', function(event){
 //Use event delegation to catch dynamically generated elements
 bookList.onclick = function (event) {  
     let target = event.target;
-    //Event to change read status
+    // Event to change read status
     if (target.classList.contains("read-button-Yes")){
         console.log ("yes");
     }
@@ -71,17 +64,20 @@ bookList.onclick = function (event) {
     }
     //Event to delete book
     if (target.classList.contains("delete-button")) {
-        let libraryIndex = target.parentNode.parentNode.id;
-        myLibrary.splice(libraryIndex, 1);
-        document.getElementById(libraryIndex).remove();
+        const bookToRemove = target.parentNode.parentNode.firstElementChild.innerHTML;
+        const rowToRemove = target.parentNode.parentNode;
+        const libraryBookEntry = myLibrary.find(book => book.title === bookToRemove);        
+        myLibrary.splice(libraryBookEntry, 1); 
+        rowToRemove.remove();
     }
 }
 
-//Starting Books 
+// Starting Books 
 const book1 = new Book("The Shining", "Steven King", 780, "Yes");
 const book2 = new Book("Farenheit 451", "Ray Bradbury", 300, "No");
-book1.addBookToLibrary();
-book2.addBookToLibrary();
+
 addBookToPage(book1);
+myLibrary.push(book1);
 addBookToPage(book2);
+myLibrary.push(book2);
 
