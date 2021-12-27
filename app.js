@@ -66,7 +66,7 @@ bookList.onclick = function (event) {
     if (target.classList.contains("delete-button")) {
         const bookToRemove = target.parentNode.parentNode.firstElementChild.innerHTML;
         const rowToRemove = target.parentNode.parentNode;
-        const libraryBookEntry = myLibrary.find(book => book.title === bookToRemove);        
+        const libraryBookEntry = myLibrary.findIndex(book => book.title === bookToRemove);        
         myLibrary.splice(libraryBookEntry, 1); 
         rowToRemove.remove();
     }
