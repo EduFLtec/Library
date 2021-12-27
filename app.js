@@ -12,6 +12,25 @@ function Book (title, author, pages, read) {
         this.read = read;
     }
 
+Book.prototype.toggleRead = function (){
+    if (this.read === "Yes") {
+        this.read = "No";
+    } else if (this.read === "No"){
+        this.read = "Yes";
+    }
+}
+
+Book.prototype.styleReadButton = function(){
+    const bookRead = `<button class="mui-btn mui-btn--small mui-btn--primary read-button-Yes">Yes</button>`;
+    const bookNotRead = `<button class="mui-btn mui-btn--small mui-btn--primary read-button-No">No</button>`;
+    if(this.read === "Yes"){
+        return bookRead;
+    } 
+    if(this.read === "No"){
+        return bookNotRead;
+    }
+}
+
 function addBookToPage(book) {
         const row = document.createElement("tr");
 
@@ -20,7 +39,7 @@ function addBookToPage(book) {
         <td class="book-data title">${book.title}</td>
         <td class="book-data author">${book.author}</td>
         <td class="book-data pages">${book.pages}</td>
-        <td class="book-data read"><button class="mui-btn mui-btn--small mui-btn--primary read-button-${book.read}">${book.read}</button></td>
+        <td class="book-data read">${book.styleReadButton()}</td>
         <td><button class="mui-btn mui-btn--small mui-btn--fab mui-btn--danger delete-button">X</button></td>
         `;
         
@@ -55,18 +74,24 @@ bookForm.addEventListener('submit', function(event){
 //Use event delegation to catch dynamically generated elements
 bookList.onclick = function (event) {  
     let target = event.target;
+    const targetBookTitle = target.parentNode.parentNode.firstElementChild.innerHTML;
     // Event to change read status
     if (target.classList.contains("read-button-Yes")){
-        console.log ("yes");
+        const libraryBookEntry = myLibrary.find(book => book.title === targetBookTitle);
+        libraryBookEntry.toggleRead();
+        target.parentNode.innerHTML = `${libraryBookEntry.styleReadButton()}`;
+        console.log(libraryBookEntry);
     }
     if (target.classList.contains("read-button-No")) {
-        console.log ("no");
+        const libraryBookEntry = myLibrary.find(book => book.title === targetBookTitle);
+        libraryBookEntry.toggleRead();
+        target.parentNode.innerHTML = `${libraryBookEntry.styleReadButton()}`;
+        console.log(libraryBookEntry);
     }
     //Event to delete book
     if (target.classList.contains("delete-button")) {
-        const bookToRemove = target.parentNode.parentNode.firstElementChild.innerHTML;
         const rowToRemove = target.parentNode.parentNode;
-        const libraryBookEntry = myLibrary.findIndex(book => book.title === bookToRemove);        
+        const libraryBookEntry = myLibrary.findIndex(book => book.title === targetBookTitle);        
         myLibrary.splice(libraryBookEntry, 1); 
         rowToRemove.remove();
     }
