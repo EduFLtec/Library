@@ -6,13 +6,13 @@ View live demo: https://edufltec.github.io/Library/index.html
 
 ## Purpose
 > Demonstrate knowledge of:
-1. Object Orient Programing in JavaScript
+1. Object Oriented Programing in JavaScript
     * Object Constructors
-    * Protoypes and prototypical inheritance
+    * Prototypes and prototypical inheritance
 
 ## Goals 
 * Write clean code and use DRY principle
-* Achive Purpose with ~100 lines of JavaScript
+* Achieve Purpose with ~100 lines of JavaScript
 
 ## Things Learned
 * Differences between find() and findIndex(): https://webdevidea.com/blog/difference-between-find-and-findindex-in-javascript/
